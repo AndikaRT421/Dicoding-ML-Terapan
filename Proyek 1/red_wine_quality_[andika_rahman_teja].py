@@ -26,7 +26,7 @@ from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
 
 df = pd.read_csv('/content/winequality-red.csv')
-df.head()
+df
 
 """# EDA (Exploratory Data Analysis)"""
 
@@ -54,6 +54,7 @@ for i, column in enumerate(col_box, 1):
     plt.title(f'{column} Histogram')
 
 plt.tight_layout()
+plt.savefig('Histogram.png')
 plt.show()
 
 # Boxplot
@@ -68,6 +69,7 @@ for i, column in enumerate(col_box, 1):
     plt.title(f'{column} Boxplot')
 
 plt.tight_layout()
+plt.savefig('Boxplot(before).png')
 plt.show()
 
 df.skew()
@@ -101,6 +103,7 @@ for i, column in enumerate(col_box, 1):
     plt.title(f'{column} Boxplot')
 
 plt.tight_layout()
+plt.savefig('Boxplot(after).png')
 plt.show()
 
 """**Berdasarkan `df.skew`, data sudah tidak terlalu skew dan tidak terlalu banyak outlier**
@@ -110,6 +113,7 @@ plt.show()
 # Correlation Heatmap
 plt.figure(figsize=(15,10))
 sns.heatmap(df.corr(), cmap="YlGnBu", annot=True)
+plt.savefig('Heatmap_corr.png')
 
 """Berdasarkan korelasi tersebut, fitur `residual sugar` dan `free sulfur dioxide` akan di-*drop* karena memiliki korelasi yang kecil terhadap fitur target, yakni `quality`"""
 
@@ -124,6 +128,7 @@ plt.title('Jumlah Wine Berdasarkan Kualitasnya')
 plt.xlabel('Kualitas')
 plt.ylabel('Jumlah Wine')
 
+plt.savefig('Jumlah_wine.png')
 plt.show()
 
 """Untuk dapat mempermudah klasifikasi, kita asumsikan:
@@ -147,6 +152,7 @@ plt.title('Jumlah Wine Berdasarkan Kualitasnya')
 plt.xlabel('Kualitas')
 plt.ylabel('Jumlah Wine')
 
+plt.savefig('Jumlah_wine(kategorikal).png')
 plt.show()
 
 """# Pemisahan Data Train dan Valid"""
@@ -281,6 +287,7 @@ plt.title('Model accuracy')
 plt.ylabel('Accuracy')
 plt.xlabel('Epoch')
 plt.legend(['train', 'test'], loc='upper left')
+plt.savefig('Model_accuracy.png')
 plt.show()
 
 plt.plot(history.history['loss'])
@@ -289,6 +296,7 @@ plt.title('Model loss')
 plt.ylabel('Loss')
 plt.xlabel('Epoch')
 plt.legend(['train', 'test'], loc='upper left')
+plt.savefig('Model_loss.png')
 plt.show()
 
 ann.evaluate(X_valid, y_valid)
@@ -297,8 +305,8 @@ ann.evaluate(X_valid, y_valid)
 
 # Kesimpulan
 - Akurasi model AdaBoost = $\pm$ 73%
-- Akurasi model XGBoost = $\pm$ 77%
-- Akurasi model ANN = $\pm$ 72%
+- Akurasi model XGBoost = $\pm$ 78%
+- Akurasi model ANN = $\pm$ 73%
 
 Oleh karena itu, pada kasus ini solusi terbaiknya adalah menggunakan model **XGBoost**
 """
@@ -317,6 +325,7 @@ sns.heatmap(cf_matrix, annot=True, fmt='')
 plt.xlabel("Actual")
 plt.ylabel('Prediction')
 plt.title('Confusion Matrix')
+plt.savefig('Confusion_matrix.png')
 
 """# Sekian Terima Kasih
 

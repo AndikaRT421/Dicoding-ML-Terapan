@@ -89,8 +89,8 @@ Gambar 6. Histogram pada Dataset **Red Wine Quality**
 Gambar 7. *Boxplot* pada Dataset **Red Wine Quality**
 
 3. Mengatasi data yang *skewed* atau memiliki banyak *outlier* dengan menggunakan metode IQR (*interquartile range*). Berikut ini rumus dari metode IQR dan implementasinya pada bahasa pemrograman *python*.
-- $$\text{Batas Bawah} = Q1 - (1.5 \times \text{IQR})$$
-- $$\text{Batas Atas} = Q3 + (1.5 \times \text{IQR})$$
+- $\text{Batas Bawah} = Q1 - (1.5 \times \text{IQR})$
+- $\text{Batas Atas} = Q3 + (1.5 \times \text{IQR})$
 
 ![IQR_formula](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/IQR_Formula.png?raw=true)
 
@@ -236,7 +236,7 @@ Setelah dilakukan beberapa kali percobaan, didapatkan akurasi prediksi dari keti
 |ANN struktur *sequential*|0.75|
 Tabel 3. Akurasi Seluruh Model yang Diujikan
 
-Dari tabel tersebut, dapat disimpulkan bahwa model **XGBClassifier** dalam kondisi telah dilakukan *hyperparameter tuning* merupakan model terbaik untuk melakukan klasifikasi kualitas *wine* karena memiliki akurasi sebesar $$\pm$$ 76%.
+Dari tabel tersebut, dapat disimpulkan bahwa model **XGBClassifier** dalam kondisi telah dilakukan *hyperparameter tuning* merupakan model terbaik untuk melakukan klasifikasi kualitas *wine* karena memiliki akurasi sebesar $\pm$ 76%.
 
 ## Evaluation
 Metrik evaluasi yang digunakan pada penelitian ini adalah menggunakan fungsi dari *library* **Scikit-learn** (**sklearn**), yakni `classification_report`. Alasan menggunakan fungsi tersebut adalah untuk mempermudah mendapatkan informasi terkait metrik seperti **precision**, **recall**, **F1 score**, dan **akurasi**. Berikut ini penjelasan mengenai keempat metrik tersebut:

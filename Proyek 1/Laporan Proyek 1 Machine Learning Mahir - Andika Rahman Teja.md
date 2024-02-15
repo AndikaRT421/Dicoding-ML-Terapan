@@ -31,19 +31,25 @@ Namun, untuk dapat memproduksi *wine* dengan kualitas yang baik sehingga dapat d
 ## Data Understanding
 
 Adapun dataset yang digunakan untuk penelitian ini adalah dataset yang bersifat *open source* di [Kaggle](https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009). Selain itu, dataset tersebut juga tersedia di [UCI Machine Learning](https://archive.ics.uci.edu/dataset/186/wine+quality). Dataset tersebut semula memiliki informasi sebagai berikut:
+
 ![df](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df.png?raw=true)
+
 Gambar 1. *Overview* Dataset **Red Wine Quality**
 
 ![df_info](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df_info(before).png?raw=true)
+
 Gambar 2. Jumlah Data dan Tipe Data pada Dataset **Red Wine Quality**
 
 ![df_describe](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df_describe.png?raw=true)
+
 Gambar 3. Statistik Data pada Dataset **Red Wine Quality**
 
 ![heatmap_corr](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Heatmap_corr.png?raw=true)
+
 Gambar 4. *Heatmap Correlation* pada Dataset **Red Wine Quality**
 
 ![df_skew_before](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df_skew(before).png?raw=true)
+
 Gambar 5. Persebaran Data pada Dataset **Red Wine Quality**
 
 Dari informasi-informasi tersebut, dapat disimpulkan bahwa:
@@ -73,34 +79,58 @@ Dari informasi-informasi tersebut, dapat disimpulkan bahwa:
 ## Data Preparation
 1. Menjalankan fungsi `df.info()` dan `df.describe()` untuk mengatahui jumlah data dan fitur / kolom data, memastikan apakah data memiliki nilai NULL, dan mengetahui tipe data tiap fitur. 
 2. Melakukan visulisasi data untuk mengetahui persebaran dan kondisi dari data. Berikut ini hasil visualisasi data berupa histogram dan *boxplot*.
+
 ![histogram_before](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Histogram(before).png?raw=true)
+
 Gambar 6. Histogram pada Dataset **Red Wine Quality**
+
 ![boxplot_before](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Boxplot(before).png?raw=true)
+
 Gambar 7. *Boxplot* pada Dataset **Red Wine Quality**
 
 3. Mengatasi data yang *skewed* atau memiliki banyak *outlier* dengan menggunakan metode IQR (*interquartile range*). Berikut ini rumus dari metode IQR dan implementasinya pada bahasa pemrograman *python*.
 - $$\text{Batas Bawah} = Q1 - (1.5 \times \text{IQR})$$
 - $$\text{Batas Atas} = Q3 + (1.5 \times \text{IQR})$$
+
 ![IQR_formula](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/IQR_Formula.png?raw=true)
+
 Gambar 8. Penerapan Metode IQR pada Bahasa Pemrograman *Python*
+
 Hal ini bertujuan untuk membersihkan data agar model *machine learning* dapat memahami data yang ada dengan lebih baik. Berikut ini hasil penerapan metode IQR pada dataset **Red Wine Quality**.
+
 ![df_info_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df_info(after).png?raw=true)
+
 Gambar 9. Jumlah Data dan Tipe Data pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
+
 ![df_skew_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df_skew(after).png?raw=true)
+
 Gambar 10. Persebaran Data pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
+
 ![histogram_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Histogram(after).png?raw=true)
+
 Gambar 11. Histogram pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
+
 ![boxplot_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Boxplot(after).png?raw=true)
+
 Gambar 12. *Boxplot* pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
+
 4. Melakukan seleksi fitur dengan mempertimbangkan korelasi dari fitur `quality` dengan fitur lainnya. Korelasi fitur yang dilakukan menggunakan metode *Pearson Correlation* dengan menjalankan fungsi `df.corr()` yang juga divisualisasikan menggunakan *library* **seaborn**. Tujuan seleksi fitur ini untuk mengurangi dimensi data (agar tidak terjadi *overfitting*) dan meningkatkan akurasi model agar dapat memahami data yang relevan terhadap fitur target (yakni `quality`)
 5. Melakukan proses *labeling* pada fitur `quality` untuk mempermudah klasifikasi. Berikut ini penerapan proses *labeling* pada bahasa pemrograman *python*.
+
 ![Labeling_Quality](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Labeling_Quality.png?raw=true)
+
 Gambar 13. Proses *Labeling* pada Bahasa Pemrograman *Python*
+
 Berikut pula perbandingan data sebelum dan setelah dilakukan proses *labeling*.
+
 ![jumlah_wine](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Jumlah_wine.png?raw=true)
+
 Gambar 14. Data pada Fitur `quality` Sebelum Proses *Labeling*
+
 ![jumlah_wine_kategorikal](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Jumlah_wine(kategorikal).png?raw=true)
+
 Gambar 15. Data pada Fitur `quality` Setelah Proses *Labeling*
+
 6. Memisah dataset menjadi 2, yakni **X** sebagai variabel *input* berupa semua fitur dari dataset kecuali fitur `quality` dan **y** sebagai variabel *output* berupa fitur `quality`. Variabel **X** akan dilakukan standarisasi menggunakan fungsi `StandardScaler`. Hal ini bertujuan untuk memudahkan model dalam melakukan prediksi
 7. Variabel **X** dan **y** masing-masing akan dipisah menjadi 2 bagian, yakni bagian **train** dan **valid** dengan perbandingkan data train:valid = 7:3. Adapun pembagian data tersebut menggunakan *library* **sklearn**. Tujuan pembagian data tersebut untuk menguji akurasi model yang ada.
 
@@ -118,9 +148,13 @@ Gambar 15. Data pada Fitur `quality` Setelah Proses *Labeling*
 **Parameter yang disesuaikan**
 - `learning_rate` = mengatur bobot yang diterapkan pada setiap regressor di masing-masing proses iterasi boosting
 - `n_estimators` = jumlah model yang dilakukan proses *ensemble*
+
 ![AdaBoost_Parameter](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/AdaBoost_Parameter.png?raw=true)
+
 Gambar 16. Penerapan *Hyperparameter Tuning* pada **AdaBoostClassifier** dengan Bahasa Pemrograman *Python*
+
 ![AdaBoost_best](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/AdaBoost_Best_Parameter.png?raw=true)
+
 Gambar 17. Parameter **AdaBoostClassifier** Terbaik Setelah Dilakukan *Hyperparameter Tuning*
 
 **Hasil Prediksi Model**
@@ -146,9 +180,13 @@ Tabel 1. Akurasi Model **AdaBoostClassifier**
 - `subsample` = Proporsi dari sampel *training* yang akan digunakan untuk melatih setiap *decision tree*
 - `colsample_bytree` = Proporsi dari fitur-fitur yang akan digunakan dalam membuat setiap *decision tree*
 - `n_estimators` = jumlah *decision tree* yang dilakukan pada proses ensemble
+
 ![XGBoost_Parameter](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/XGBoost_parameter.png?raw=true)
+
 Gambar 18. Penerapan *Hyperparameter Tuning* pada **XGBClassifier** dengan Bahasa Pemrograman *Python*
+
 ![XGBoost_best](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/XGBoost_Best_Parameter.png?raw=true)
+
 Gambar 19. Parameter **XGBClassifier** Terbaik Setelah Dilakukan *Hyperparameter Tuning*
 
 **Hasil Prediksi Model**
@@ -168,17 +206,23 @@ Tabel 2. Akurasi Model **XGBClassifier**
 - Biaya komputasi cenderung mahal (membutuhkan gpu pada beberapa kasus)
 
 **Arsitektur Model**
+
 ![Arsitektur_Ann](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Arsitektur_ANN.png?raw=true)
+
 Gambar 20. Arsitektur ANN
 
 ![ANN_Callback_Compile](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/ANN_Compile_Callback.png?raw=true)
+
 Gambar 21. Parameter Tambahan ANN
 
 **Hasil Prediksi Model**
+
 ![Akurasi_ANN](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Model_ANN_accuracy.png?raw=true)
+
 Gambar 22. Plot Akurasi Model ANN
 
 ![Loss_ANN](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Model_ANN_loss.png?raw=true)
+
 Gambar 23. Plot *Loss* Model ANN
 
 ### Model Terbaik
@@ -208,7 +252,9 @@ $$\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{Fal
 $$\text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Samples}}$$
 
 Selain menggunakan `classification_report`, penulis juga menggunakan metrik tambahan berupa `confusion_matrix` untuk mengetahui detail hasil prediksi yang dilakukan oleh model. Berikut visualisasi dari `confusion_matrix`.
+
 ![confusion_matrix](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Confusion_matrix.png?raw=true)
+
 Gambar 24. *Confusion Matrix* Hasil Prediksi Model **XGBClassifier** Setelah Dilakukan *Hyperparameter Tuning*
 
 Pada Gambar 24, memiliki penjelasan sebagai berikut.

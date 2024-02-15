@@ -32,7 +32,7 @@ df
 
 df.info()
 
-df.describe()
+df.describe().applymap(lambda x: f"{x:0.2f}")
 
 """Dari sini, kita bisa menemukan beberapa fakta:
 - Tidak ada data yang **NULL** (total data = 1599)
@@ -54,7 +54,7 @@ for i, column in enumerate(col_box, 1):
     plt.title(f'{column} Histogram')
 
 plt.tight_layout()
-plt.savefig('Histogram.png')
+plt.savefig('Histogram(before).png')
 plt.show()
 
 # Boxplot
@@ -82,7 +82,8 @@ def drop_outliers(df, field_name):
     df.drop(df[df[field_name] > (iqr + np.percentile(df[field_name], 75))].index, inplace=True)
     df.drop(df[df[field_name] < (np.percentile(df[field_name], 25) - iqr)].index, inplace=True)
 
-col_skew = ['chlorides', 'residual sugar', 'sulphates']
+col_skew = ['chlorides', 'residual sugar', 'sulphates',
+            'total sulfur dioxide', 'free sulfur dioxide']
 for col in col_skew:
   drop_outliers(df, col)
 
@@ -90,6 +91,21 @@ df.skew()
 
 df.reset_index(inplace = True, drop = True)
 df.info()
+
+# Histogram
+col_box = df.columns
+color_palette = sns.color_palette("Set1", len(col_box))
+plt.figure(figsize=(15, 10))
+
+for i, column in enumerate(col_box, 1):
+    plt.subplot((len(col_box) // 3) + 1, 3, i)
+    sns.histplot(data=df, x=column, color=color_palette[i - 1], kde=True)
+    plt.xlabel(column)
+    plt.title(f'{column} Histogram')
+
+plt.tight_layout()
+plt.savefig('Histogram(after).png')
+plt.show()
 
 # kita cek lagi
 col_box = df.columns
@@ -106,9 +122,7 @@ plt.tight_layout()
 plt.savefig('Boxplot(after).png')
 plt.show()
 
-"""**Berdasarkan `df.skew`, data sudah tidak terlalu skew dan tidak terlalu banyak outlier**
-> Pertimbangkan juga jumlah datanya
-"""
+"""**Berdasarkan `df.skew`, data sudah tidak terlalu skew dan tidak terlalu banyak outlier**"""
 
 # Correlation Heatmap
 plt.figure(figsize=(15,10))
@@ -304,9 +318,9 @@ ann.evaluate(X_valid, y_valid)
 """**Arsitektur ANN ini adalah yang terbaik setelah beberapa percobaan mengganti ukuran layer dan fungsi aktivasinya**
 
 # Kesimpulan
-- Akurasi model AdaBoost = $\pm$ 73%
-- Akurasi model XGBoost = $\pm$ 78%
-- Akurasi model ANN = $\pm$ 73%
+- Akurasi model AdaBoost = $\pm$ 74%
+- Akurasi model XGBoost = $\pm$ 76%
+- Akurasi model ANN = $\pm$ 75%
 
 Oleh karena itu, pada kasus ini solusi terbaiknya adalah menggunakan model **XGBoost**
 """

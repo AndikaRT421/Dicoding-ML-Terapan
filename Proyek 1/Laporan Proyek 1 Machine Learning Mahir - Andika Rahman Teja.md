@@ -6,13 +6,6 @@
 
 Namun, untuk dapat memproduksi *wine* dengan kualitas yang baik sehingga dapat dipasarkan secara global tidaklah mudah. Ada banyak faktor yang mempengaruhi sebuah *wine* sehingga dapat dinikmati dengan baik oleh pelanggan. Faktor-faktor tersebut mulai dari tingkat keasaman, persentase kandungan gula, densitas (kepadatan), hingga faktor banyaknya kandungan alkohol pada minuman tersebut [5]. Dengan banyaknya faktor tersebut, akan sulit bagi produsen, penjual hingga pembeli untuk membedakan kualitas *wine* yang baik dan buruk. Untuk menyelesaikan masalah tersebut, penulis akan membuat sebuah pendekatan ilmiah melalui salah satu penerapan *Artificial Intelligence* (AI), yakni dengan membuat beberapa model *machine learning* dan memilih model terbaik yang mampu melakukan klasifikasi kualitas *wine* berdasarkan faktor-faktor yang telah dijelaskan sebelumnya. 
 
-### Referensi
-1. F. Y. Wiredjo, "WINE PAIRING TERHADAP DELAPAN MAKANAN NUSANTARA INDONESIA (RENDANG, SOTO BETAWI, GUDEG, RAWON, BAKSO, SATE AYAM, PEMPEK, AYAM BETUTU)", Universitas Katholik Soegijapranata, Semarang, 2021.
-2. N. Obermayer, E. Kővári, J. Leinonen, G. Bak, and M. Valeri, “How social media practices shape family business performance: The Wine Industry Case Study,” European Management Journal, vol. 40, no. 3, pp. 360–371, Jun. 2022. 
-3. A. A. Ugaglia, J.-M. Cardebat, and A. Corsi, The Palgrave Handbook of Wine Industry Economics. Cham, Switzerland: Palgrave Macmillan, 2019. 
-4. R. Ferrer-Gallego and P. Silva, “The wine industry by-products: Applications for Food Industry and Health Benefits,” Antioxidants, vol. 11, no. 10, p. 2025, Oct. 2022.
-5. K. MacNeil, The Wine Bible. New York: Workman Publishing Company, 2022. 
-
 
 ## Business Understanding
 
@@ -32,7 +25,7 @@ Namun, untuk dapat memproduksi *wine* dengan kualitas yang baik sehingga dapat d
 ### Solusi yang ditawarkan
 - Menggunakan model *Adaptive Boosting* berupa `AdaBoostClassifier` beserta *hyperparameter tuning*-nya
 - Menggunakan model *Gradient Boosting* berupa `XGBClassifier` beserta *hyperparameter tuning*-nya
-- Menggunakan model *Artificial Neural Network* berupa model `sequential`
+- Menggunakan model *Artificial Neural Network* (ANN) berupa struktur `sequential`
 
 
 ## Data Understanding
@@ -89,20 +82,27 @@ Gambar 7. *Boxplot* pada Dataset **Red Wine Quality**
 - $$\text{Batas Bawah} = Q1 - (1.5 \times \text{IQR})$$
 - $$\text{Batas Atas} = Q3 + (1.5 \times \text{IQR})$$
 ![IQR_formula](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/IQR_Formula.png?raw=true)
-Gambar 8. Rumus Metode IQR
+Gambar 8. Penerapan Metode IQR pada Bahasa Pemrograman *Python*
 Hal ini bertujuan untuk membersihkan data agar model *machine learning* dapat memahami data yang ada dengan lebih baik. Berikut ini hasil penerapan metode IQR pada dataset **Red Wine Quality**.
 ![df_info_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df_info(after).png?raw=true)
-Gambar 9. Jumlah Data dan Tipe Data pada Dataset Red Wine Quality Setelah Menerapkan Metode IQR
+Gambar 9. Jumlah Data dan Tipe Data pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
 ![df_skew_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/df_skew(after).png?raw=true)
 Gambar 10. Persebaran Data pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
 ![histogram_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Histogram(after).png?raw=true)
 Gambar 11. Histogram pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
-![boxplot_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Boxplot(before).png?raw=true)
+![boxplot_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Boxplot(after).png?raw=true)
 Gambar 12. *Boxplot* pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
 4. Melakukan seleksi fitur dengan mempertimbangkan korelasi dari fitur `quality` dengan fitur lainnya. Korelasi fitur yang dilakukan menggunakan metode *Pearson Correlation* dengan menjalankan fungsi `df.corr()` yang juga divisualisasikan menggunakan *library* **seaborn**. Tujuan seleksi fitur ini untuk mengurangi dimensi data (agar tidak terjadi *overfitting*) dan meningkatkan akurasi model agar dapat memahami data yang relevan terhadap fitur target (yakni `quality`)
-5. Melakukan proses *labeling* pada fitur `quality` untuk mempermudah klasifikasi.
-
-Setelah proses tersebut selesai, dataset akan dipisah menjadi 2 bagian, yakni bagian **train** dan **valid** dengan perbandingkan data train:valid = 7:3. Adapun pembagian data tersebut menggunakan *library* **sklearn**. Tujuan pembagian data tersebut untuk menguji akurasi model yang ada.
+5. Melakukan proses *labeling* pada fitur `quality` untuk mempermudah klasifikasi. Berikut ini penerapan proses *labeling* pada bahasa pemrograman *python*.
+![Labeling_Quality](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Labeling_Quality.png?raw=true)
+Gambar 13. Proses *Labeling* pada Bahasa Pemrograman *Python*
+Berikut pula perbandingan data sebelum dan setelah dilakukan proses *labeling*.
+![jumlah_wine](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Jumlah_wine.png?raw=true)
+Gambar 14. Data pada Fitur `quality` Sebelum Proses *Labeling*
+![jumlah_wine_kategorikal](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Jumlah_wine(kategorikal).png?raw=true)
+Gambar 15. Data pada Fitur `quality` Setelah Proses *Labeling*
+6. Memisah dataset menjadi 2, yakni **X** sebagai variabel *input* berupa semua fitur dari dataset kecuali fitur `quality` dan **y** sebagai variabel *output* berupa fitur `quality`. Variabel **X** akan dilakukan standarisasi menggunakan fungsi `StandardScaler`. Hal ini bertujuan untuk memudahkan model dalam melakukan prediksi
+7. Variabel **X** dan **y** masing-masing akan dipisah menjadi 2 bagian, yakni bagian **train** dan **valid** dengan perbandingkan data train:valid = 7:3. Adapun pembagian data tersebut menggunakan *library* **sklearn**. Tujuan pembagian data tersebut untuk menguji akurasi model yang ada.
 
 
 ## Modeling
@@ -118,8 +118,17 @@ Setelah proses tersebut selesai, dataset akan dipisah menjadi 2 bagian, yakni ba
 **Parameter yang disesuaikan**
 - `learning_rate` = mengatur bobot yang diterapkan pada setiap regressor di masing-masing proses iterasi boosting
 - `n_estimators` = jumlah model yang dilakukan proses *ensemble*
+![AdaBoost_Parameter](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/AdaBoost_Parameter.png?raw=true)
+Gambar 16. Penerapan *Hyperparameter Tuning* pada **AdaBoostClassifier** dengan Bahasa Pemrograman *Python*
+![AdaBoost_best](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/AdaBoost_Best_Parameter.png?raw=true)
+Gambar 17. Parameter **AdaBoostClassifier** Terbaik Setelah Dilakukan *Hyperparameter Tuning*
 
-**Hasil Hyperparameter Tuning => Tidak ada perubahan akurasi yang signifikan (kurang dari 1%)**
+**Hasil Prediksi Model**
+|Kondisi Model|Akurasi|
+| --- | --- |
+|Sebelum *hyperparameter tuning*|0.74|
+|Setelah *hyperparameter tuning*|0.74|
+Tabel 1. Akurasi Model **AdaBoostClassifier**
 
 ### Model XGBClassifier
 **Kelebihan**
@@ -137,8 +146,17 @@ Setelah proses tersebut selesai, dataset akan dipisah menjadi 2 bagian, yakni ba
 - `subsample` = Proporsi dari sampel *training* yang akan digunakan untuk melatih setiap *decision tree*
 - `colsample_bytree` = Proporsi dari fitur-fitur yang akan digunakan dalam membuat setiap *decision tree*
 - `n_estimators` = jumlah *decision tree* yang dilakukan pada proses ensemble
+![XGBoost_Parameter](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/XGBoost_parameter.png?raw=true)
+Gambar 18. Penerapan *Hyperparameter Tuning* pada **XGBClassifier** dengan Bahasa Pemrograman *Python*
+![XGBoost_best](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/XGBoost_Best_Parameter.png?raw=true)
+Gambar 19. Parameter **XGBClassifier** Terbaik Setelah Dilakukan *Hyperparameter Tuning*
 
-**Hasil Hyperparameter Tuning => Terjadi kenaikan akurasi sebesar 2%**
+**Hasil Prediksi Model**
+|Kondisi Model|Akurasi|
+| --- | --- |
+|Sebelum *hyperparameter tuning*|0.75|
+|Setelah *hyperparameter tuning*|0.76|
+Tabel 2. Akurasi Model **XGBClassifier**
 
 ### Model ANN
 **Kelebihan**
@@ -149,16 +167,64 @@ Setelah proses tersebut selesai, dataset akan dipisah menjadi 2 bagian, yakni ba
 - Rentan mengalami *overfitting*
 - Biaya komputasi cenderung mahal (membutuhkan gpu pada beberapa kasus)
 
+**Arsitektur Model**
+![Arsitektur_Ann](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Arsitektur_ANN.png?raw=true)
+Gambar 20. Arsitektur ANN
+
+![ANN_Callback_Compile](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/ANN_Compile_Callback.png?raw=true)
+Gambar 21. Parameter Tambahan ANN
+
+**Hasil Prediksi Model**
+![Akurasi_ANN](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Model_ANN_accuracy.png?raw=true)
+Gambar 22. Plot Akurasi Model ANN
+
+![Loss_ANN](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Model_ANN_loss.png?raw=true)
+Gambar 23. Plot *Loss* Model ANN
+
 ### Model Terbaik
-Setelah dilakukan beberapa kali percobaan, didapatkan model terbaik untuk klasifikasi kualitas *wine* pada dataset ini adalah model **XGBoost** yang telah di-*hyperparameter Tuning* dengan akurasi sekitar 77%. 
+Setelah dilakukan beberapa kali percobaan, didapatkan akurasi prediksi dari ketiga model yang telah diuji sebagai berikut.
+|Model|Akurasi|
+| --- | --- |
+|AdaBoostClassifier sebelum *hyperparameter tuning*|0.74|
+|AdaBoostClassifier setelah *hyperparameter tuning*|0.74|
+|XGBClassifier sebelum *hyperparameter tuning*|0.75|
+|XGClassifier setelah *hyperparameter tuning*|**0.76**|
+|ANN struktur *sequential*|0.75|
+Tabel 3. Akurasi Seluruh Model yang Diujikan
+
+Dari tabel tersebut, dapat disimpulkan bahwa model **XGBClassifier** dalam kondisi telah dilakukan *hyperparameter tuning* merupakan model terbaik untuk melakukan klasifikasi kualitas *wine* karena memiliki akurasi sebesar $$\pm$$ 76%.
 
 ## Evaluation
 Metrik evaluasi yang digunakan pada penelitian ini adalah menggunakan fungsi dari *library* **Scikit-learn** (**sklearn**), yakni `classification_report`. Alasan menggunakan fungsi tersebut adalah untuk mempermudah mendapatkan informasi terkait metrik seperti **precision**, **recall**, **F1 score**, dan **akurasi**. Berikut ini penjelasan mengenai keempat metrik tersebut:
-- **Precision** = mengukur seberapa banyak dari item yang diprediksi sebagai positif benar-benar benar positif.![Precision](https://miro.medium.com/v2/resize:fit:828/format:webp/1*qMqJuCi_0fGr0rwu9uP27w.png)
-- **Recall** = mengukur seberapa banyak dari semua item yang benar-benar positif yang berhasil diidentifikasi oleh model. ![Recall](https://miro.medium.com/v2/resize:fit:828/format:webp/1*mQQ7vz3zfFOL9vJdt9LDqg.png)
-- **F1 score** =  rata-rata harmonik dari precision dan recall. ![F1 score](https://miro.medium.com/v2/resize:fit:898/1*7tC4-fUHtcffvXGcGTJJtg.png)
-- **Akurasi** = rasio dari jumlah prediksi yang benar (*True Positives* dan *True Negatives*) dibagi dengan jumlah total prediksi. ![Akurasi](https://miro.medium.com/v2/resize:fit:828/format:webp/1*ZOm7TWPX97sZpnjpS_YT4w.png)
+- **Precision** = mengukur seberapa banyak dari item yang diprediksi sebagai positif benar-benar benar positif. Berikut ini adalah rumus dari *precision*.
+$$\text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}$$
 
-Untuk mengetahui hasil prediksi secara detail, penulis juga menampilkan `confusion_matrix` pada **Jupyter Notebook**. Untuk lebih lengkapnya, dapat dilihat hasilnya pada Jupyter Notebook.
+- **Recall** = mengukur seberapa banyak dari semua item yang benar-benar positif yang berhasil diidentifikasi oleh model. Berikut ini adalah rumus dari *recall*.
+$$\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}$$
+
+- **F1 score** =  rata-rata harmonik dari precision dan recall. Berikut ini rumus dari *F1 score* $$\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+- **Akurasi** = rasio dari jumlah prediksi yang benar (*True Positives* dan *True Negatives*) dibagi dengan jumlah total prediksi. Berikut ini rumus dari akurasi.
+$$\text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Samples}}$$
+
+Selain menggunakan `classification_report`, penulis juga menggunakan metrik tambahan berupa `confusion_matrix` untuk mengetahui detail hasil prediksi yang dilakukan oleh model. Berikut visualisasi dari `confusion_matrix`.
+![confusion_matrix](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Confusion_matrix.png?raw=true)
+Gambar 24. *Confusion Matrix* Hasil Prediksi Model **XGBClassifier** Setelah Dilakukan *Hyperparameter Tuning*
+
+Pada Gambar 24, memiliki penjelasan sebagai berikut.
+- Model memprediksi **benar** kualitas *wine* 0 atau buruk sebanyak 118 kali
+- Model memprediksi **benar** kualitas *wine* 1 atau bagus sebanyak 165 kali
+- Model memprediksi **salah** kualitas *wine* yang seharusnya 0 namun diprediksi sebagai 1 sebanyak 36 kali
+- Model memprediksi **salah** kualitas *wine* yang seharusnya 1 namun diprediksi sebagai 0 sebanyak 52 kali
+
+Dengan akurasi model tersebut, diharapkan dapat membantu produsen, penjual, dan pembeli *wine* untuk membantu membedakan kualitas *wine* yang bagus dan yang buruk.
+
+
+# Referensi
+1. F. Y. Wiredjo, "WINE PAIRING TERHADAP DELAPAN MAKANAN NUSANTARA INDONESIA (RENDANG, SOTO BETAWI, GUDEG, RAWON, BAKSO, SATE AYAM, PEMPEK, AYAM BETUTU)", Universitas Katholik Soegijapranata, Semarang, 2021.
+2. N. Obermayer, E. Kővári, J. Leinonen, G. Bak, and M. Valeri, “How social media practices shape family business performance: The Wine Industry Case Study,” European Management Journal, vol. 40, no. 3, pp. 360–371, Jun. 2022. 
+3. A. A. Ugaglia, J.-M. Cardebat, and A. Corsi, The Palgrave Handbook of Wine Industry Economics. Cham, Switzerland: Palgrave Macmillan, 2019. 
+4. R. Ferrer-Gallego and P. Silva, “The wine industry by-products: Applications for Food Industry and Health Benefits,” Antioxidants, vol. 11, no. 10, p. 2025, Oct. 2022.
+5. K. MacNeil, The Wine Bible. New York: Workman Publishing Company, 2022.
 
 **---Sekian, Terima Kasih---**

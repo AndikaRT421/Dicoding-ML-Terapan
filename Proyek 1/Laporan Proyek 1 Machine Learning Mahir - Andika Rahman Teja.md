@@ -96,15 +96,9 @@ Gambar 2. Histogram pada Dataset **Red Wine Quality**
 
 Gambar 3. *Boxplot* pada Dataset **Red Wine Quality**
 
-<<<<<<< HEAD
-3. Mengatasi data yang *skewed* atau memiliki banyak *outlier* dengan menggunakan metode IQR (*interquartile range*). Berikut ini rumus dari metode IQR.
-- $$\text{Batas Bawah} = Q1 - (1.5 \times \text{IQR})$$
-- $$\text{Batas Atas} = Q3 + (1.5 \times \text{IQR})$$
-=======
 3. Mengatasi data yang *skewed* atau memiliki banyak *outlier* dengan menggunakan metode IQR (*interquartile range*). Berikut ini rumus dari metode IQR dan implementasinya pada bahasa pemrograman *python*.
 - $\text{Batas Bawah} = Q1 - (1.5 \times \text{IQR})$
 - $\text{Batas Atas} = Q3 + (1.5 \times \text{IQR})$
->>>>>>> d35070a1cb5b65219f471d60d343f09fe4c6b63e
 
 Hal ini bertujuan untuk membersihkan data agar model *machine learning* dapat memahami data yang ada dengan lebih baik. Berikut ini hasil penerapan metode IQR pada dataset **Red Wine Quality**.
 

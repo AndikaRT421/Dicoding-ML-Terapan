@@ -1,4 +1,4 @@
-# Laporan Proyek 1 Machine Learning Mahir - Andika Rahman Teja
+# Laporan Proyek 1 Machine Learning - Andika Rahman Teja
 
 ## Domain Proyek
 
@@ -267,7 +267,7 @@ Setelah dilakukan beberapa kali percobaan, didapatkan akurasi prediksi dari keti
 
 Tabel 8. Akurasi Seluruh Model yang Diujikan
 
-Dari tabel tersebut, dapat disimpulkan bahwa model **XGBClassifier** dalam kondisi telah dilakukan *hyperparameter tuning* merupakan model terbaik untuk melakukan klasifikasi kualitas *wine* karena memiliki akurasi sebesar $\pm$ 76%.
+Dari tabel tersebut, dapat disimpulkan bahwa model **XGBClassifier** dalam kondisi telah dilakukan *hyperparameter tuning* merupakan model terbaik untuk melakukan klasifikasi kualitas *wine* karena memiliki akurasi sebesar $$\pm$$ 76%.
 
 
 Metrik evaluasi yang digunakan pada penelitian ini adalah menggunakan fungsi dari *library* **Scikit-learn** (**sklearn**), yakni `classification_report`. Alasan menggunakan fungsi tersebut adalah untuk mempermudah mendapatkan informasi terkait metrik seperti **precision**, **recall**, **F1 score**, dan **akurasi**. Berikut ini penjelasan mengenai keempat metrik tersebut:

@@ -149,7 +149,7 @@ Dengan mengetahui nilai kedekatan tersebut, maka model akan memberikan sebanyak 
 
 ### Collaborative Filtering
 
-Pada penelitian ini, dilakukan teknik **Collaborative Filtering** berdasarkan rating yang diberikan *user* lain. Model yang digunakan pada teknik ini adalah implementasi *deep learning* dengan menggunakan *layer* **Embedding**. Adapun arsitektur model *deep learning* yang digunakan adalah sebagai berikut:
+Pada penelitian ini, dilakukan teknik **Collaborative Filtering** berdasarkan rating yang diberikan *user* lain. Model yang digunakan pada teknik ini adalah implementasi *deep learning* dengan menggunakan *layer* **Embedding**. Adapun arsitektur model *deep learning* yang diimplementasikan pada *class* `RecommenderNet()` adalah sebagai berikut:
 
 |Urutan *Layer*|Tipe *Layer*|Ukuran *Output*|Jumlah Parameter|
 |---|---|---|---|
@@ -163,7 +163,20 @@ Pada penelitian ini, dilakukan teknik **Collaborative Filtering** berdasarkan ra
 
 Tabel 3. Arsitektur Model untuk **Collaborative Filtering**
 
+Berdasarkan arsitektur model tersebut, berikut cara kerja model `RecommenderNet()`:
+1. Data `user` akan memasuki *layer* `Embedding` (sesuai pada *layer* 1) untuk memetakan nilai vektor dari data tersebut
+2. Data `user` juga akan memasuki *layer* `Embedding` (sesuai pada *layer* 2) untuk mendapatkan nilai bias untuk perkalian dot pada operasi selanjutnya
+3. Data `anime` akan memasuki *layer* `Embedding` (sesuai pada *layer* 3) untuk memetakan nilai vektor dari data tersebut
+4. Data `anime` juga akan memasuki *layer* `Embedding` (sesuai pada *layer* 4) untuk mendapatkan nilai bias untuk perkalian dot pada operasi selanjutnya
+5. Melakukan operasi perkalian dot dari nilai hasil *layer* 1 dan 3 yang kemudian dilakukan penjumlahan nilai bias hasil *layer* 2 dan 4
+6. Melakukan operasi `Flatten` untuk memapatkan dimensi data sehingga dapat memasuki *layer* selanjutnya
+7. Hasil dari *layer* `Flatten` dimasukkan ke *layer* `Dense` dengan fungsi aktivasi `relu`
+8. Hasil dari *layer* `Dense` sebelumnya akan dimasukkan ke *layer* `Dense` dengan fungsi aktivasi `sigmoid`
+9. *Output* dari layer terakhir adalah prediksi rekomendasi untuk *pair* antara *user* dan *anime*
+
 Pada model ini juga menerapkan beberapa *callback* seperti `ModelCheckpoint`, `LearningRateScheduler`, dan `EarlyStopping`. Hal ini bertujuan agar model dapat menemukan titik optimum dengan baik dan mencegah *Exploding Gradient* pada model.
+
+Hasil akhir dari model ini adalah memberikan rekomendasi sebanyak N rekomendasi *anime* yang paling sesuai dengan riwayat *anime* yang ditonton dan diberi rating oleh penonton.
 
 **Kelebihan**
 - Mampu menangani data yang besar dan kompleks
@@ -195,13 +208,26 @@ Model akan menyarankan 10 *anime* yang paling sesuai dengan *anime* yang telah d
 
 Tabel 4. Hasil Rekomendasi Model **Content Based Filtering**
 
-Berdasarkan hasil rekomendasi di atas menunjukkan bahwa **akurasi model adalah 100%** dengan alasan:
+Untuk dapat mengetahui akurasi model **Content Based Filtering** dapat menggunakan metrik evaluasi berupa **Precision Content Based Filtering**. Berikut ini formula untuk metrik tersebut:
+
+$$\text{Precision} = \frac{\text{Jumlah item relevan yang direkomendasikan}}{\text{Jumlah total item yang direkomendasikan}}$$
+
+Berdasarkan metrik tersebut, **akurasi model adalah 100%** dengan alasan:
 - Seluruh *anime* dengan `Genres` berupa `Drama, Fantasy, Suspense` terdapat pada rekomendasi yang disarankan oleh model
 - Karena `Genres` dengan tipe `Drama, Fantasy, Suspense` hanya terdapat 7 film (termasuk yang *anime* yang dicari), maka sisanya akan menyesuaikan ketiga genre tersebut.
+- $$\text{Precision} = \frac{10}{10} = 1$$
 
 Dengan akurasi model tersebut, diharapkan dapat membantu *user* dalam menemukan konten *anime* yang mirip berdasarkan genre dari *anime* yang ditonton sebelumnya.
 
 ### Collaborative Filtering
+
+Berikut ini hasil *training* model `RecommenderNet()`:
+
+![RMSE_model](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%202/images/RMSE_Model.png?raw=true)
+
+Gambar 3. *Root Mean Square Error* Model
+
+Pada Gambar 3, model semula mempelajari data dengan baik. Namun dari *epoch* 8 hingga 25, model mengalami kondisi *overfitting*. Hal ini dibuktikan dari nilai *Root Mean Square Error* (RMSE) pada data *train* semakin membaik dan pada data *test* semakin memburuk. Kondisi ini dapat terjadi jika model yang digunakan terlalu kompleks untuk data pada penelitian ini. Untuk mengatasinya, dapat memberikan *layer* `BatchNormalization` atau `Regularization` ataupun `Dropout`.
 
 Model akan menyarankan 10 *anime* yang paling sesuai dengan *user* berdasarkan *anime* yang pernah ditonton dan diberi rating serta genre *anime* yang menyesuaikan dan menggunakan data `anime-dataset-2023.csv` dan `users-score-2023.csv`. Sebagai contoh, akan dipilih *user* bernama Caramelito dengan ID 375717. Berikut ini riwayat *anime* yang pernah ditonton dan diberi rating oleh *user* tersebut:
 

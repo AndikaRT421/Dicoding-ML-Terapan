@@ -2,306 +2,245 @@
 
 ## Domain Proyek
 
-*Wine* merupakan minuman berbasis alkohol yang pembuatannya melalui proses fermentasi [1]. *Wine* juga menjadi minuman yang sangat digemari oleh masyarakat di benua Eropa (Italia, Prancis, dan Spanyol) dan Amerika (Amerika Serikat, Chile, dan Argentina). Hal ini dapat dibuktikan dari kegiatan ekspor dan impor *wine* di negara-negara tersebut yang selalu meningkat dari tahun 1995 [2 - 3]. Tidak hanya di benua Eropa dan Amerika, hampir semua masyarakat di dunia juga menghasilkan dan mengonsumsi minuman *wine*. Terbukti pada tahun 2021, produksi *wine* secara global mencapai angka 250 juta hektoliter. Dengan angka tersebut dapat membuktikan bahwa produksi *wine* dapat menjadi potensi bisnis yang besar. Selain bisnis di sektor industri makanan, *wine* juga berpontensi untuk digunakan pada bisnis pertanian, farmasi, hingga kosmetik [4].
+*Anime* merupakan salah satu produk budaya pop Jepang yang berbasis animasi. *Anime* mulai dibawa masuk ke Amerika Serikat sejak era pendudukan Amerika Serikat atas Jepang dan mengalami perkembangan pasar yang cukup pesat [1]. *Anime* Jepang sangat digemari oleh masyarakat di dunia, termasuk di Indonesia. Hal ini sesuai dengan data yang disajikan oleh *The Association of Japanese Animations* (AJA) mengenai jumlah kontrak industri animasi Jepang di berbagai negara sepanjang tahun 2019, yang menunjukkan bahwa Indonesia menempati peringkat kelima di Asia Tenggara [2]. Kontrak tersebut meliputi lisensi penayangan anime serta royalti *Original Soundtrack Theme Song Anime* [3]. 
 
-Namun, untuk dapat memproduksi *wine* dengan kualitas yang baik sehingga dapat dipasarkan secara global tidaklah mudah. Ada banyak faktor yang mempengaruhi sebuah *wine* sehingga dapat dinikmati dengan baik oleh pelanggan. Faktor-faktor tersebut mulai dari tingkat keasaman, persentase kandungan gula, densitas (kepadatan), hingga faktor banyaknya kandungan alkohol pada minuman tersebut [5]. Dengan banyaknya faktor tersebut, akan sulit bagi produsen, penjual hingga pembeli untuk membedakan kualitas *wine* yang baik dan buruk. Untuk menyelesaikan masalah tersebut, penulis akan membuat sebuah pendekatan ilmiah melalui salah satu penerapan *Artificial Intelligence* (AI), yakni dengan membuat beberapa model *machine learning* dan memilih model terbaik yang mampu melakukan klasifikasi kualitas *wine* berdasarkan faktor-faktor yang telah dijelaskan sebelumnya. 
+Antusiasme masyarakat yang tinggi terhadap penayangan *anime* Jepang melalui layanan *streaming* mengakibatkan industri di sektor tersebut banyak mengalami keuntungan. Hal ini dibuktikan pada tahun 2019, industri *anime* mendapatkan keuntungan sebesar 68.5 miliar Yen untuk pendapatan domestik. Keberadaan layanan *streaming*, baik berbayar maupun gratis, semakin mempermudah penonton untuk menikmati *anime* [4]. Untuk dapat meningkatkan kepuasaan penonton *anime*, beberapa distributor dan penyiar *anime* memerlukan data preferensi penggunanya untuk dapat diolah menjadi sebuah sistem rekomendasi yang menampilkan *anime* yang sesuai dengan pengguna tersebut [5]. Oleh karena itu, pada penelitian ini, akan membuat sebuah sistem rekomendasi *anime* tersebut.
 
 
 ## Business Understanding
 
 ### Rumusan Masalah
-- Bagaimana cara mengetahui kualitas *wine* dari kandungan yang ada pada *wine* tersebut?
-- Apa model *machine learning* terbaik yang dapat mengklasifikasikan kualitas *wine*?
+- Bagaimana cara membuat sistem rekomendasi *anime* berdasarkan genre yang mirip?
+- Bagaimana cara membuat sistem rekomendasi *anime* berdasarkan riwayat *anime* yang pernah ditonton dan diberi rating serta faktor penilaian pengguna lain?
 
 ### Tujuan
-- Untuk mengetahui kualitas *wine* dari kandungan yang ada pada *wine* tersebut
-- Untuk mengetahui model *machine learning* terbaik yang dapat mengklasifikasikan kualitas *wine*
+- Untuk mengetahui cara membuat sistem rekomendasi *anime* berdasarkan genre yang mirip
+- Untuk mengetahui cara membuat sistem rekomendasi *anime* berdasarkan riwayat *anime* yang pernah ditonton dan diberi rating serta faktor penilaian pengguna lain
 
 ### Dampak Penelitian terhadap Bisnis
-- Membantu proses produksi *wine*, terutama pada proses klasifikasi kualitas *wine*
-- Membantu produsen untuk menentukan harga *wine* yang diproduksi berdasarkan kualitasnya
-- Meningkatkan kepuasan pelanggan terhadap produk *wine* karena telah membeli sesuai kualitas yang ditawarkan
+- Membantu distributor dan penyiar *anime* dalam menyesuaikan *anime* yang akan disiarkan berdasarkan rekomendasi dari para pengguna
+- Membantu distributor dan penyiar *anime* dalam memonetisasi penanyangan *anime* kepada konsumen dengan menawarkan rekomendasi *anime* yang sesuai preferensi konsumen tersebut dalam bentuk iklan, konten berbayar, penjualan *merchandise*, dan sebagainya.
+- Membantu pengguna dalam menemukan konten *anime* berdasarkan preferensinya dan pertimbangan rating *anime* yang diberikan oleh pengguna lain
 
 ### Solusi yang ditawarkan
-- Menggunakan model *Adaptive Boosting* berupa `AdaBoostClassifier` beserta *hyperparameter tuning*-nya
-- Menggunakan model *Gradient Boosting* berupa `XGBClassifier` beserta *hyperparameter tuning*-nya
-- Menggunakan model *Artificial Neural Network* (ANN) berupa struktur `sequential`
+- Menggunakan model **Content Based Filtering** untuk membuat sistem rekomendasi *anime* berdasarkan genre yang mirip
+- Menggunakan model **Collaborative Filtering** untuk membuat membuat sistem rekomendasi *anime* berdasarkan penilaian pengguna lain
 
 
 ## Data Understanding
 
-Adapun dataset yang digunakan untuk penelitian ini adalah dataset yang bersifat *open source* di [Kaggle](https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009). Selain itu, dataset tersebut juga tersedia di [UCI Machine Learning](https://archive.ics.uci.edu/dataset/186/wine+quality). Dataset tersebut semula memiliki informasi sebagai berikut:
+Adapun dataset yang digunakan untuk penelitian ini adalah dataset yang bersifat *open source* di [Kaggle](https://www.kaggle.com/datasets/dbdmobile/myanimelist-dataset). Dikarenakan faktor keterbatasan komputasi pada penelitian ini, dataset yang akan digunakan dari *website* tersebut hanya 2 data, yakni `anime-dataset-2023.csv` dan `users-score-2023.csv`. Dengan sedikit penyesuaian data (menyesuaikan jumlah fitur / kolom dan jumlah data), berikut informasi yang terdapat pada kedua data tersebut:
 
-|Describe|fixed acidity|volatile acidity|citric acid|residual sugar|chlorides|free sulfur dioxide|total sulfur dioxide|density|pH|sulphates|alcohol|quality|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|count|1599|1599|1599|1599|1599|1599|1599|1599|1599|1599|1599|1599|
-|mean|8.32|0.53|0.27|2.54|0.09|15.87|46.47|1.00|3.31|0.66|10.42|5.64|
-|std|1.74|0.18|0.19|1.41|0.05|10.46|32.90|0.00|0.15|0.17|1.07|0.81|
-|min|4.60|0.12|0.00|0.90|0.01|1.00|6.00|0.99|2.74|0.33|8.40|3.00|
-|25%|7.10|0.39|0.09|1.90|0.07|7.00|22.00|1.00|3.21|0.55|9.50|5.00|
-|50%|7.90|0.52|0.26|2.20|0.08|14.00|38.00|1.00|3.31|0.62|10.20|6.00|
-|75%|9.20|0.64|0.42|2.60|0.09|21.00|62.00|1.00|3.40|0.73|11.10|6.00|
-|max|15.90|1.58|1.00|15.50|0.61|72.00|289.00|1.00|4.01|2.00|14.90|8.00|
+### `anime-dataset-2023.csv`
 
-Tabel 1. Statistik Data Pada Dataset **Red Wine Quality**
+|Fitur|Jumlah Data Tidak NULL|Tipe Data|
+|---|---|---|
+|anime_id|19976|*int64*|
+|Name|19976|*object*|
+|Genres|19976|*object*|
+|Other name|19976|*object*|
+|Score|19976|*object*|
+|Type|19976|*object*|
 
-Adapun keterangan *describe* pada Tabel 1 adalah sebagai berikut:
-- `count` = Banyaknya data
-- `mean` = rata-rata data
-- `std` = standar deviasi data
-- `min` = nilai minimum pada data
-- `25%` = kuartil 1 pada data
-- `50%` = kuartil 2 / nilai tengah pada data
-- `75%` = kuartil 3 pada data
-- `max` = nilai maksimal pada data
+Tabel 1. *Overview* Data **anime-dataset-2023**
 
-Selain itu, terdapat informasi berupa korelasi antar fitur pada dataset ini. Berikut visualisasi korelasi antar fitur.
+**Keterangan fitur dari Tabel 1**:
+- `anime_id` => ID unik untuk setiap *anime*
+- `Name` => Judul *anime*
+- `Genres` => Genre pada *anime* tersebut
+- `Other name` => Judul *anime* dalam bahasa lain (bahasa Jepang, Cina, atau Korea)
+- `Score` => Skor atau rating *anime* tersebut
+- `Type` => Tipe penayangan *anime* (serial TV, film, OVA, dan sebagainya)
 
-![heatmap_corr](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Heatmap_corr.png?raw=true)
+**Kesimpulan informasi dari data anime-dataset-2023**:
+- Terdapat 6 fitur / kolom dengan masing-masing fitur memiliki 19976 data
+- Data tersebut tidak memiliki nilai NULL
+- ID *anime* tidak urut karena terdapat angka yang terlewati (misal ID 2, 3, dan 4 tidak ada pada data)
+- Hampir semua *anime* pada data tersebut memiliki lebih dari 1 genre
+- Fitur `Score` memiliki rentang nilai dari 1-10
 
-Gambar 1. *Heatmap Correlation* pada Dataset **Red Wine Quality**
+### `users-score-2023.csv`
 
-Dari informasi-informasi di atas, dapat disimpulkan bahwa:
-- Tidak ada data yang **NULL** (total data = 1599)
-- Terdapat 12 fitur / kolom dan sesuai keterangan pemilik dataset bahwa fitur `quality` akan menjadi targetnya
-- Semua data berbentuk numerik (*float* dan *int*)
-- Fitur `quality` ternyata hanya bernilai dari 3 hingga 8 (tidak sesuai keterangan pemilik dataset bahwa bernilai 0 hingga 10)
-- Fitur `pH` bernilai 2.74 hingga 4.01 sehingga menunjukkan bahwa dataset ini sesuai kondisi riil (*wine* bersifat asam)
-- Fitur `residual sugar` dan `free sulfur dioxide` memiliki korelasi yang rendah terhadap fitur target, yakni `quality`
+|Fitur|Jumlah Data Tidak NULL|Tipe Data|
+|---|---|---|
+|user_id|200000|*int64*|
+|Username|199997|*object*|
+|anime_id|200000|*int64*|
+|Anime Title|200000|*object*|
+|rating|200000|*int64*|
 
-### Fitur-Fitur Pada Dataset:
-- `fixed acidity` =  jumlah asam yang tetap dalam *wine* setelah semua asam yang mudah menguap telah dihilangkan
-- `volatile acidity` = jumlah asam yang mudah menguap dalam *wine*
-- `citric acid` = komponen asam yang ditemukan dalam buah-buahan, termasuk anggur
-- `residual sugar` = jumlah gula yang tersisa setelah proses fermentasi selesai
-- `chlorides` = kandungan garam klorida dalam *wine*
-- `free sulfur dioxide` = sulfur dioksida dalam bentuk bebas yang terlarut dalam *wine*
-- `total sulfur dioxide` = jumlah total sulfur dioksida dalam *wine*, termasuk yang terikat dengan senyawa lain
-- `density` = massa *wine* per satuan volume pada suhu dan tekanan tertentu (kepadatan *wine*)
-- `pH` = ukuran keasaman atau kebasaan pada *wine*
-- `sulphates` = kandungan sulfur pada *wine*
-- `alcohol` = kandungan alkohol pada *wine*
-- `quality` [**Output Variabel**] = kualitas *wine*
+Tabel 2. *Overview* Data **users-score-2023**
+
+**Keterangan fitur dari Tabel 2**:
+- `user_id` => ID unik untuk setiap *user* atau pengguna
+- `Username` => Nama dari *user*
+- `anime_id` => ID unik untuk setiap *anime*
+- `Anime Title` => Judul *anime*
+- `rating` => Rating yang diberikan oleh *user* untuk *anime* tersebut
+
+**Kesimpulan informasi dari data users-score-2023**:
+- Terdapat 5 fitur / kolom dengan masing-masing fitur memiliki 199997 data
+- Data tersebut memiliki nilai NULL sebanyak 3
+- ID *user* tidak urut
+- ID *anime* tidak urut karena terdapat angka yang terlewati 
+- Fitur `anime_id` pada data ini memiliki representasi yang sama dengan fitur `anime_id` pada data **anime-dataset-2023**
+- Fitur `Anime Title` pada data ini memiliki nilai yang sama dengan fitur `Name` pada data **anime-dataset-2023** jika berdasarkan ID nya
+- Fitur `rating` memiliki rentang nilai dari 1-10
 
 
 ## Data Preparation
-1. Menjalankan fungsi `df.info()` dan `df.describe()` untuk mengatahui jumlah data dan fitur / kolom data, memastikan apakah data memiliki nilai NULL, dan mengetahui tipe data tiap fitur. 
-2. Melakukan visulisasi data untuk mengetahui persebaran dan kondisi dari data. Berikut ini hasil visualisasi data berupa histogram dan *boxplot*.
 
-![histogram_before](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Histogram(before).png?raw=true)
+### `anime-dataset-2023.csv`
 
-Gambar 2. Histogram pada Dataset **Red Wine Quality**
+1. Melakukan pemeriksaan nilai unik pada fitur `Score` karena seharusnya skor memiliki tipe data *int* atau *float*. Ditemukan fakta bahwa terdapat nilai UNKNOWN pada fitur tersebut. Nilai UNKNOWN tersebut juga ditemukan pada fitur `Other name` dan `Type`.
+2. Pada fitur `Score`, terdapat 6037 data yang bernilai UNKNOWN (30% dari keseluruhan data). Untuk menangani nilai UNKNOWN pada fitur ini, dilakukan pengubahan nilai UNKNOWN menjadi nilai 0 (nol) dengan asumsi tidak ada *user* yang memberikan penilaian *anime* tersebut. Selain itu, alasan lain mengubah nilai UNKNOWN tersebut adalah untuk tidak kehilangan banyak informasi jika data dengan nilai UNKNOWN di-*drop*.
+3. Pada fitur `Other name` dan `Type` tidak dilakukan penanganan apapun dikarenakan jumlah nilai UNKNOWN pada kedua fitur sangat kecil (kurang dari 1% dari keseluruhan data) dan kedua fitur tidak mempengaruhi sistem rekomendasi yang akan dibuat.
+4. Berikut ini visualisasi data untuk fitur `Score` setelah mengubah nilai UNKNOWN:
 
-![boxplot_before](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Boxplot(before).png?raw=true)
+![score_histogram](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%202/images/Score_Histogram.png?raw=true)
 
-Gambar 3. *Boxplot* pada Dataset **Red Wine Quality**
+Gambar 1. Histogram Fitur `Score`
 
-3. Mengatasi data yang *skewed* atau memiliki banyak *outlier* dengan menggunakan metode IQR (*interquartile range*). Berikut ini rumus dari metode IQR.
-- $$\text{Batas Bawah} = Q1 - (1.5 \times \text{IQR})$$
-- $$\text{Batas Atas} = Q3 + (1.5 \times \text{IQR})$$
+Pada Gambar 1, data terdistribusi secara normal (dengan mengabaikan nilai 0 sebagai representasi nilai UNKNOWN)
 
-Hal ini bertujuan untuk membersihkan data agar model *machine learning* dapat memahami data yang ada dengan lebih baik. Berikut ini hasil penerapan metode IQR pada dataset **Red Wine Quality**.
+5. Memisahkan fitur dengan menggunakan fitur `anime_id`, `Name`, dan `Genres` sebagai fitur latih untuk model.
+6. Melakukan pemisahan genre *anime* dengan melakukan **One-Hot Encoding**. Setelah dilakukan proses tersebut, diketahui jumlah jenis genre yang ada pada data adalah sebanyak 21 jenis.
 
-|Fitur / Kolom|Total Data (Tidak NULL)|Tipe Data|
-|---|---|---|
-|*fixed acidity*|1235|*float64*|
-|*volatile acidity*|1235|*float64*|
-|*citric acid*|1235|*float64*|
-|*residual sugar*|1235|*float64*|
-|*chlorides*|1235|*float64*|
-|*free sulfur dioxide*|1235|*float64*|
-|*total sulfur dioxide*|1235|*float64*|
-|*density*|1235|*float64*|
-|pH|1235|*float64*|
-|*sulphates*|1235|*float64*|
-|*alcohol*|1235|*float64*|
-|*quality*|1235|*int64*|
+### `users-score-2023.csv`
 
-Tabel 2. *overview* Data pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
+1. Melakukan *drop* data pada data yang memiliki nilai NULL. Hal ini dikarenakan jumlah data yang NULL sangat kecil (kurang dari 1%) dan membuat data menjadi lebih logis (tidak mungkin terdapat *user* yang memiliki ID namun tidak memiliki nama sehingga kondisi tersebut diragukan kebenarannya).
+2. Berikut ini visualisasi fitur `rating` setelah dilakukan *drop* data:
 
-![histogram_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Histogram(after).png?raw=true)
+![rating_histogram](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%202/images/Rating_Histogram.png?raw=true)
 
-Gambar 4. Histogram pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
+Gambar 2. Histogram Fitur `rating`
 
-![boxplot_after](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Boxplot(after).png?raw=true)
+Pada Gambar 2, data terdistribusi secara normal.
 
-Gambar 5. *Boxplot* pada Dataset **Red Wine Quality** Setelah Menerapkan Metode IQR
-
-4. Melakukan seleksi fitur dengan mempertimbangkan korelasi dari fitur `quality` dengan fitur lainnya. Korelasi fitur yang dilakukan menggunakan metode *Pearson Correlation* dengan menjalankan fungsi `df.corr()` yang juga divisualisasikan menggunakan *library* **seaborn**. Tujuan seleksi fitur ini untuk mengurangi dimensi data (agar tidak terjadi *overfitting*) dan meningkatkan akurasi model agar dapat memahami data yang relevan terhadap fitur target (yakni `quality`)
-5. Melakukan proses *labeling* pada fitur `quality` untuk mempermudah klasifikasi. Berikut perbandingan data sebelum dan setelah dilakukan proses *labeling*.
-
-![jumlah_wine](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Jumlah_wine.png?raw=true)
-
-Gambar 6. Data pada Fitur `quality` Sebelum Proses *Labeling*
-
-![jumlah_wine_kategorikal](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Jumlah_wine(kategorikal).png?raw=true)
-
-Gambar 7. Data pada Fitur `quality` Setelah Proses *Labeling*
-
-6. Memisah dataset menjadi 2, yakni **X** sebagai variabel *input* berupa semua fitur dari dataset kecuali fitur `quality` dan **y** sebagai variabel *output* berupa fitur `quality`. Variabel **X** akan dilakukan standarisasi menggunakan fungsi `StandardScaler`. Hal ini bertujuan untuk memudahkan model dalam melakukan prediksi
-7. Variabel **X** dan **y** masing-masing akan dipisah menjadi 2 bagian, yakni bagian **train** dan **valid** dengan perbandingkan data train:valid = 7:3. Adapun pembagian data tersebut menggunakan *library* **sklearn**. Tujuan pembagian data tersebut untuk menguji akurasi model yang ada.
+3. Menggabungkan `df_user` yang menyimpan data `user_score_2023.csv` dengan `df_anime_cut` yang menyimpan data `anime_id` dan `Genres` dari data `anime-dataset-2023.csv`. Penggabungan ini menggunakan fungsi `merge` pada *library* **pandas** berdasarkan nilai `anime_id` dari kedua variabel yang bersesuaian. Tujuan penggabungan ini untuk membantu mengukur tingkat akurasi model dalam memberikan rekomendasi nantinya.
+4. Melakukan proses *encoding* dan *mapping* pada fitur `user_id` dan `anime_id`. Hal ini bertujuan untuk membantu model dalam melakukan rekomendasi kepada seorang *user* nantinya.
+5. Memisahkan fitur dengan menggunakan fitur `user` (hasil *mapping* nilai *encoding* fitur `user_id`) dan fitur `anime` (hasil *mapping* nilai *encoding* fitur `anime_id`) sebagai fitur *input* model. Sedangkan fitur `rating` akan digunakan sebagai fitur *output* model.
+6. Melakukan standarisasi dengan menggunakan `StandardScaler()` dari *library* **sklearn** untuk fitur `rating` atau fitur *output*. Hal ini bertujuan untuk memudahkan model dalam melakukan proses *training*.
+7. Membagi data *input* dan *output* dengan menggunakan `train_test_split()` dari *library* **sklearn** dengan rasio data latih : data test sebesar 3:1.
 
 
 ## Modeling
 
-### Model AdaBoostClassifier
+### Content Based Filtering
+
+Pada penelitian ini, dilakukan teknik **Content Based Filtering** berdasarkan genre *anime* dan menggunakan data `anime-dataset-2023.csv`. Model yang digunakan pada teknik ini adalah `cosine_similarity()` dari *library* **sklearn**. Cara kerja dari model ini adalah mencari nilai kedekatan antar item. Semakin mirip kedua item, maka nilainya semakin mendekati 1. Sedangkan semakin tidak mirip kedua item, maka nilainya semakin mendekati 0. Adapun rumus yang digunakan pada model ini adalah sebagai berikut:
+
+$$\text{{Cosine Similarity}}(A, B) = \frac{{A \cdot B}}{{\|A\| \|B\|}}$$
+
+dengan keterangan:
+- A dan B => array bilangan dari data atau item
+- A . B => hasil perkalian dot item A dan item B
+- |A| |B| => norma Euclidean dari masing-masing item A dan item B
+
+Dengan mengetahui nilai kedekatan tersebut, maka model akan memberikan sebanyak N rekomendasi *anime* yang sesuai berdasarkan nilai kedekatan tertinggi dengan *anime* tersebut.
+
 **Kelebihan**
-- Mengurangi kemungkinan terjadi *overfitting* karena model fokus pada pengurangan bias dan varians
-- Parameter yang tidak rumit
+- Perhitungan yang relatif cepat dan efisien
+- Memiliki kemampuan untuk memahami relasi semantik antar item dengan baik
 
 **Kekurangan**
-- Sensitif terhadap data *noise* atau *outlier*
+- Rentan terhadap data yang *noise*
+- Tidak dapat memperhatikan urutan dan konteks khusus yang dapat mempengaruhi sistem rekomendasi
 
-**Parameter yang disesuaikan**
-- `learning_rate` = mengatur bobot yang diterapkan pada setiap regressor di masing-masing proses iterasi boosting
-- `n_estimators` = jumlah model yang dilakukan proses *ensemble*
+### Collaborative Filtering
 
-|Parameter|Rentang Parameter|
-|---|---|
-|n_estimators|50 - 200|
-|learning_rate|0.01, 0.05, 0.1, 0.3, 1|
-
-Tabel 3. Parameter dan Rentang Parameter yang Disesuaikan pada Model **AdaBoostClassifier**
-
-Adapun proses *hyperparameter tuning* ini menggunakan metode **RandomizedSearchCV**
-
-### Model XGBClassifier
-**Kelebihan**
-- Mampu menangani data yang besar dan kompleks
-- Mendukung proses *training* model secara paralel
-
-**Kekurangan**
-- Rentan mengalami *overfitting*
-- Memiliki parameter yang kompleks dan rumit
-
-**Parameter yang disesuaikan**
-- `learning_rate` = mengatur bobot yang diterapkan pada setiap regressor di masing-masing proses iterasi boosting
-- `max_depth` = Mengatur maksimum kedalaman tiap *decision tree*
-- `min_child_weight` = mengatur *weight* atau bobot minimum yang dibutuhkan untuk membuat *child* pada *decision tree*
-- `subsample` = Proporsi dari sampel *training* yang akan digunakan untuk melatih setiap *decision tree*
-- `colsample_bytree` = Proporsi dari fitur-fitur yang akan digunakan dalam membuat setiap *decision tree*
-- `n_estimators` = jumlah *decision tree* yang dilakukan pada proses ensemble
-
-|Parameter|Rentang Parameter|
-|---|---|
-|learning_rate|0.01, 0.1, 0.2, 0.3, 0.5|
-|max_depth|3, 5, 6, 10|
-|min_child_weight|1, 3, 5|
-|subsample|0.5, 0.7, 1|
-|colsample_bytree|0.5, 0.7, 1|
-|n_estimators|100, 200, 500|
-Tabel 4. Parameter dan Rentang Parameter yang Disesuaikan pada Model **XGBClassifier**
-
-Adapun proses *hyperparameter tuning* ini menggunakan metode **RandomizedSearchCV**
-
-### Model ANN
-**Kelebihan**
-- Implementasi yang mudah
-- Fleksibel untuk mengatur parameter
-
-**Kekurangan**
-- Rentan mengalami *overfitting*
-- Biaya komputasi cenderung mahal (membutuhkan *gpu* pada beberapa kasus)
-
-**Arsitektur Model**
+Pada penelitian ini, dilakukan teknik **Collaborative Filtering** berdasarkan rating yang diberikan *user* lain. Model yang digunakan pada teknik ini adalah implementasi *deep learning* dengan menggunakan *layer* **Embedding**. Adapun arsitektur model *deep learning* yang digunakan adalah sebagai berikut:
 
 |Urutan *Layer*|Tipe *Layer*|Ukuran *Output*|Jumlah Parameter|
 |---|---|---|---|
-|1|Dense|(None, 128)|1280|
-|2|Dropout|(None, 128)|0|
-|3|Dense|(None, 512)|66048|
-|4|Dropout|(None, 512)|0|
-|5|Dense|(None, 512)|262656|
-|6|Dropout|(None, 512)|0|
-|7|Dense|(None, 512)|262656|
-|8|Dropout|(None, 512)|0|
-|9|Dense|(None, 1)|513|
+|1|Embedding (user_vector)|multiple|4646304|
+|2|Embedding (user_bias)|multiple|96798|
+|3|Embedding (anime_vector)|multiple|393024|
+|4|Embedding (anime_bias)|multiple|8188|
+|5|Flatten|multiple|0|
+|6|Dense|multiple|128|
+|7|Dense|multiple|65|
 
-Tabel 5. Arsitektur ANN Struktur *Sequential*
+Tabel 3. Arsitektur Model untuk **Collaborative Filtering**
+
+Pada model ini juga menerapkan beberapa *callback* seperti `ModelCheckpoint`, `LearningRateScheduler`, dan `EarlyStopping`. Hal ini bertujuan agar model dapat menemukan titik optimum dengan baik dan mencegah *Exploding Gradient* pada model.
+
+**Kelebihan**
+- Mampu menangani data yang besar dan kompleks
+- Mampu merepresentasikan keterkaitan antar item dengan baik
+
+**Kekurangan**
+- Rentan mengalami *overfitting*
+- Cenderung memiliki model yang kompleks sehingga diperlukan biaya komputasi yang besar
 
 
 ## Evaluation
 
-### Hasil *Hyperparameter Tuning*
+### Content Based Filtering
 
-Berikut ini hasil *hyperparameter tuning* untuk model **AdaBoostClassifier* dan **XGBClassifier**.
+Model akan menyarankan 10 *anime* yang paling sesuai dengan *anime* yang telah dipilih sebelumnya berdasarkan kesamaan genre. Sebagai contoh, akan dipilih *anime* dengan judul **Re:Zero kara Hajimeru Isekai Seikatsu** dengan genre `Drama`, `Fantasy`, dan `Suspense`. Berikut 10 rekomendasi *anime* yang diberikan oleh model:
 
-|Parameter|Ukuran Parameter|
-|---|---|
-|learning_rate|0.1|
-|n_estimators|71|
+|Nomor|Judul *Anime*|Genre|
+|---|---|---|
+|1|Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season|Drama, Fantasy, Suspense|
+|2|Re:Zero kara Hajimeru Isekai Seikatsu - Hyouketsu no Kizuna|Drama, Fantasy, Suspense|
+|3|Re:Zero kara Hajimeru Isekai Seikatsu 3rd Season|Drama, Fantasy, Suspense|
+|4|Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season Part 2|Drama, Fantasy, Suspense|
+|5|Shigofumi: Sore kara|Drama, Fantasy, Suspense|
+|6|Shigofumi|Drama, Fantasy, Suspense|
+|7|Narutaru: Mukuro Naru Hoshi Tama Taru Ko|Drama, Suspense|
+|8|Escape from Tsuki no Uragawa Zoo|Drama, Fantasy|
+|9|Violet Evergarden Gaiden: Eien to Jidou Shuki Ningyou|Drama, Fantasy|
+|10|Wonder Egg Priority|Drama, Fantasy|
 
-Tabel 6. Parameter **AdaBoostClassifier** Hasil *Hyperparameter Tuning*
+Tabel 4. Hasil Rekomendasi Model **Content Based Filtering**
 
-|Parameter|Ukuran Parameter|
-|---|---|
-|learning_rate|0.01|
-|max_depth|5|
-|min_child_weight|1|
-|subsample|0.7|
-|colsample_bytree|1|
-|n_estimators|500|
+Berdasarkan hasil rekomendasi di atas menunjukkan bahwa **akurasi model adalah 100%** dengan alasan:
+- Seluruh *anime* dengan `Genres` berupa `Drama, Fantasy, Suspense` terdapat pada rekomendasi yang disarankan oleh model
+- Karena `Genres` dengan tipe `Drama, Fantasy, Suspense` hanya terdapat 7 film (termasuk yang *anime* yang dicari), maka sisanya akan menyesuaikan ketiga genre tersebut.
 
-Tabel 7. Parameter **XGBClassifier**
+Dengan akurasi model tersebut, diharapkan dapat membantu *user* dalam menemukan konten *anime* yang mirip berdasarkan genre dari *anime* yang ditonton sebelumnya.
 
-### Model Terbaik
+### Collaborative Filtering
 
-Karena model ANN dilatih pada setiap *epoch* sehingga akurasinya dapat dicatat melalui sebuah grafik plot akurasi dan *loss* sebagai berikut.
+Model akan menyarankan 10 *anime* yang paling sesuai dengan *user* berdasarkan *anime* yang pernah ditonton dan diberi rating serta genre *anime* yang menyesuaikan dan menggunakan data `anime-dataset-2023.csv` dan `users-score-2023.csv`. Sebagai contoh, akan dipilih *user* bernama Caramelito dengan ID 375717. Berikut ini riwayat *anime* yang pernah ditonton dan diberi rating oleh *user* tersebut:
 
-![Akurasi_ANN](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Model_ANN_accuracy.png?raw=true)
+|ID *Anime*|Judul *Anime*|Rating|Genre|
+|---|---|---|---|
+|1575|Code Geass: Hangyaku no Lelouch|7|Action, Award Winning, Drama, Sci-Fi|
+|5081|Bakemonogatari|4|Mystery, Romance, Supernatural|
+|1482|D.Gray-man|9|Action, Adventure, Fantasy|
+|3731|Itazura na Kiss|9|Comedy, Romance|
 
-Gambar 8. Plot Akurasi Model ANN
+Tabel 5. Riwayat *Anime* yang Pernah Ditonton dan Diberi Rating
 
-![Loss_ANN](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Model_ANN_loss.png?raw=true)
+Selanjutnya, model memberikan 10 rekomendasi *anime* yang sesuai dengan riwayat *anime* yang pernah ditonton dan diberi rating oleh *user* sebagai berikut:
 
-Gambar 9. Plot *Loss* Model ANN
+|Nomor|Judul *Anime*|Genre|
+|---|---|---|
+|1|Gintama|Action, Comedy, Sci-Fi|
+|2|Hunter x Hunter (2011)|Action, Adventure, Fantasy|
+|3|Cowboy Bebop|Action, Award Winning, Sci-Fi|
+|4|Clannad: After Story|Drama, Romance, Supernatural|
+|5|Code Geass: Hangyaku no Lelouch R2|Action, Award Winning, Drama, Sci-Fi|
+|6|Fullmetal Alchemist: Brotherhood|Action, Adventure, Drama, Fantasy|
+|7|Steins;Gate|Drama, Sci-Fi, Suspense|
+|8|Howl no Ugoku Shiro|Adventure, Award Winning, Drama, Fantasy, Romance|
+|9|Great Teacher Onizuka|Comedy|
+|10|Rurouni Kenshin: Meiji Kenkaku Romantan - Tsuioku-hen|Action, Drama, Romance|
 
-Setelah dilakukan beberapa kali percobaan, didapatkan akurasi prediksi dari ketiga model yang telah diuji sebagai berikut.
-|Model|Akurasi|
-| --- | --- |
-|AdaBoostClassifier sebelum *hyperparameter tuning*|0.74|
-|AdaBoostClassifier setelah *hyperparameter tuning*|0.74|
-|XGBClassifier sebelum *hyperparameter tuning*|0.75|
-|XGClassifier setelah *hyperparameter tuning*|**0.76**|
-|ANN struktur *sequential*|0.75|
+Tabel 6. Hasil Rekomendasi Model **Collaborative Filtering**
 
-Tabel 8. Akurasi Seluruh Model yang Diujikan
+Berdasarkan hasil rekomendasi di atas menunjukkan bahwa **model memiliki akurasi yang sangat baik**. Hal ini terbukti dari genre *anime* yang pernah ditonton oleh *user* sesuai dengan genre *anime* yang disarankan oleh model.
 
-Dari tabel tersebut, dapat disimpulkan bahwa model **XGBClassifier** dalam kondisi telah dilakukan *hyperparameter tuning* merupakan model terbaik untuk melakukan klasifikasi kualitas *wine* karena memiliki akurasi sebesar $$\pm$$ 76%.
-
-
-Metrik evaluasi yang digunakan pada penelitian ini adalah menggunakan fungsi dari *library* **Scikit-learn** (**sklearn**), yakni `classification_report`. Alasan menggunakan fungsi tersebut adalah untuk mempermudah mendapatkan informasi terkait metrik seperti **precision**, **recall**, **F1 score**, dan **akurasi**. Berikut ini penjelasan mengenai keempat metrik tersebut:
-- **Precision** = mengukur seberapa banyak dari item yang diprediksi sebagai positif benar-benar benar positif. Berikut ini adalah rumus dari *precision*.
-$$\text{Precision} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Positives}}$$
-
-- **Recall** = mengukur seberapa banyak dari semua item yang benar-benar positif yang berhasil diidentifikasi oleh model. Berikut ini adalah rumus dari *recall*.
-$$\text{Recall} = \frac{\text{True Positives}}{\text{True Positives} + \text{False Negatives}}$$
-
-- **F1 score** =  rata-rata harmonik dari precision dan recall. Berikut ini rumus dari *F1 score* $$\text{F1 Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
-
-- **Akurasi** = rasio dari jumlah prediksi yang benar (*True Positives* dan *True Negatives*) dibagi dengan jumlah total prediksi. Berikut ini rumus dari akurasi.
-$$\text{Akurasi} = \frac{\text{True Positives} + \text{True Negatives}}{\text{Total Samples}}$$
-
-Selain menggunakan `classification_report`, penulis juga menggunakan metrik tambahan berupa `confusion_matrix` untuk mengetahui detail hasil prediksi yang dilakukan oleh model. Berikut visualisasi dari `confusion_matrix`.
-
-![confusion_matrix](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/images/Confusion_matrix.png?raw=true)
-
-Gambar 10. *Confusion Matrix* Hasil Prediksi Model **XGBClassifier** Setelah Dilakukan *Hyperparameter Tuning*
-
-Pada Gambar 10, memiliki penjelasan sebagai berikut.
-- Model memprediksi **benar** kualitas *wine* 0 atau buruk sebanyak 118 kali
-- Model memprediksi **benar** kualitas *wine* 1 atau bagus sebanyak 165 kali
-- Model memprediksi **salah** kualitas *wine* yang seharusnya 0 namun diprediksi sebagai 1 sebanyak 36 kali
-- Model memprediksi **salah** kualitas *wine* yang seharusnya 1 namun diprediksi sebagai 0 sebanyak 52 kali
-
-Dengan akurasi model tersebut, diharapkan dapat membantu produsen, penjual, dan pembeli *wine* untuk membantu membedakan kualitas *wine* yang bagus dan yang buruk.
+Dengan akurasi model tersebut, diharapkan dapat membantu *user* dalam menemukan konten anime yang mirip berdasarkan riwayat *anime* yang pernah ditonton dan diberi rating sebelumnya serta rekomendasi dari *user* lain.
 
 
 # Referensi
-1. F. Y. Wiredjo, "WINE PAIRING TERHADAP DELAPAN MAKANAN NUSANTARA INDONESIA (RENDANG, SOTO BETAWI, GUDEG, RAWON, BAKSO, SATE AYAM, PEMPEK, AYAM BETUTU)", Universitas Katholik Soegijapranata, Semarang, 2021.
-2. N. Obermayer, E. Kővári, J. Leinonen, G. Bak, and M. Valeri, “How social media practices shape family business performance: The Wine Industry Case Study,” European Management Journal, vol. 40, no. 3, pp. 360–371, Jun. 2022. 
-3. A. A. Ugaglia, J.-M. Cardebat, and A. Corsi, The Palgrave Handbook of Wine Industry Economics. Cham, Switzerland: Palgrave Macmillan, 2019. 
-4. R. Ferrer-Gallego and P. Silva, “The wine industry by-products: Applications for Food Industry and Health Benefits,” Antioxidants, vol. 11, no. 10, p. 2025, Oct. 2022.
-5. K. MacNeil, The Wine Bible. New York: Workman Publishing Company, 2022.
+1. A. P. B. Aji, "Peningkatan Popularitas Anime Jepang di Pasar Amerika Serikat di Era Pandemi Covid-19", Universitas Gadjah Mada, Yogyakarta, 2022.
+2. H. Masuda, "Anime Industry Report 2019", *The Association of Japanese Animations*, Tokyo, 2019
+3. I. Aisyah, "ANIME DAN GAYA HIDUP MAHASISWA (Studi pada Mahasiswa yang Tergabung dalam Komunitas Japan Freak UIN Jakarta)", Universitas Islam Negeri Syarif Hidayatullah, Jakarta, 2019.
+4. A. Rahardini, "PENGARUH TERPAAN ANIME HAIKYU!! TERHADAP KEPUTUSAN PEMBELIAN SEPATU ASICS", Universitas Atma Jaya, Yogyakarta, 2023.
+5. Z. Wang, X. Yu, N. Feng, and Z. Wang, “An improved collaborative movie recommendation system using Computational Intelligence,” Journal of Visual Languages &amp; Computing, vol. 25, no. 6, pp. 667–675, 2014.
 
 **---Sekian, Terima Kasih---**

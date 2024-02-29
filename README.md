@@ -9,6 +9,6 @@ Pada *course* ini membahas penerapan *Machine Learning* dalam kehidupan nyata. S
 **Target Penelitian**
 Membuat beberapa model machine learning dan memilih model terbaik yang mampu melakukan klasifikasi kualitas wine berdasarkan faktor-faktor yang mempengaruhi kualitas *wine* tersebut.
 
-[Laporan Proyek 1](Proyek 1/Laporan Proyek 1 Machine Learning Mahir - Andika Rahman Teja.md)
+[Laporan Proyek 1](Proyek\ 1/Laporan\ Proyek\ 1\ Machine\ Learning\ Mahir\ -\ Andika\ Rahman\ Teja.md)
 
 ## Proyek 2 => Membuat Sistem Rekomendasi *Anime*

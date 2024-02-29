@@ -15,3 +15,17 @@ Membuat beberapa model machine learning dan memilih model terbaik yang mampu mel
 [Kode Proyek 1](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%201/Red_Wine_Quality_%5BAndika_Rahman_Teja%5D.ipynb)
 
 ## Proyek 2 => Membuat Sistem Rekomendasi *Anime*
+
+![Gambar_anime](https://static.wikia.nocookie.net/isekai-quartet/images/9/99/Web-Slider-Anime.jpg/revision/latest/scale-to-width-down/1280?cb=20210120222916)
+
+**Target Penelitian**
+
+Membuat sistem rekomendasi *anime* berdasarkan kemiripan genre *anime*, preferensi pengguna, dan penilaian *anime* dari pengguna lain
+
+[Laporan Proyek 2](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%202/Laporan%20Proyek%202%20Machine%20Learning%20Mahir%20-%20Andika%20Rahman%20Teja.md)
+
+[Kode Proyek 2](https://github.com/AndikaRT421/Dicoding-ML-Terapan/blob/master/Proyek%202/Dicoding_Recommendation_System_Project.ipynb)
+
+---
+
+# Sekian, Terima Kasih :grin:

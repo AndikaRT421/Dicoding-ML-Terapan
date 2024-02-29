@@ -4,7 +4,7 @@ Pada *course* ini membahas penerapan *Machine Learning* dalam kehidupan nyata. S
 
 ## Proyek 1 => Klasifikasi Kualitas *Wine*
 
-![Gambar_Wine](https://res.cloudinary.com/dk0z4ums3/image/upload/v1616382898/attached_image/keuntungan-dan-kerugian-mengonsumsi-wine.jpg)
+![Gambar_Wine](https://winery.ph/cdn/shop/articles/WPH_Blog_Hero_Graphics_1.jpg?v=1620291667)
 
 **Target Penelitian**
 
